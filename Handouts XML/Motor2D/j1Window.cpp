@@ -35,12 +35,12 @@ bool j1Window::Awake()
 		Uint32 flags = SDL_WINDOW_SHOWN;
 		// Ask this!!!!!!
 
-		//width = App->config.child("window").child("width").attribute("value").as_uint();
-		width = 800;
-		//height = App->config.child("window").child("height").attribute("value").as_uint();
-		height = 650;
-		//scale = App->config.child("window").child("scale").attribute("value").as_uint();
-		scale = 1;
+		width = App->config.child("window").child("width").attribute("value").as_uint();
+		
+		height = App->config.child("window").child("height").attribute("value").as_uint();
+		
+		scale = App->config.child("window").child("scale").attribute("value").as_uint();
+		
 
 		if(App->config.child("window").child("fullscreen").attribute("value").as_bool())
 		{
