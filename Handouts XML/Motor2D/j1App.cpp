@@ -68,11 +68,13 @@ bool j1App::Awake()
 	else {
 		LOG("No compila: %s", result.description());
 	}
+	
 
-	read = doc.first_child().child("name");
-	LOG("%s", read.name());// llegir el nom del node: name
-	LOG("%s", read.child_value());
+	config = doc.child("config");// fill del primer fill (primer fill config/segon fill node)
 
+	LOG("%s", config.name());// llegir el nom del node: name
+	//LOG("%s", config.child_value());// llegeix el que hi ha dins l atribut del node
+	LOG("%s", App->config.child("window").name());
 
 
 
@@ -91,6 +93,9 @@ bool j1App::Awake()
 
 		ret = item->data->Awake();
 		item = item->next;
+
+		
+
 	}
 
 	return ret;

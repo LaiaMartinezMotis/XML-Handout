@@ -68,7 +68,7 @@ public:
 	j1Textures*			tex;
 	j1Audio*			audio;
 	j1Scene*			scene;
-
+   pugi::xml_node config;
 
 private:
 
@@ -80,7 +80,7 @@ private:
 	// a xml_document to store the while config file and
 	// a xml_node to read specific branches of the xml
 	pugi::xml_document doc;
-	pugi::xml_node read;
+	
 
 	int					argc;
 	char**				args;
