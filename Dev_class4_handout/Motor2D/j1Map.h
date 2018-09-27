@@ -5,13 +5,15 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "j1Module.h"
-
+#include <list>
+class j1App;
 // TODO 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 // ----------------------------------------------------
 struct tileset_info {
-	uint firstgif = 0;
-	char* name; //must check
+	SDL_Texture* tilesetimage;
+	uint firstgid = 0;
+	const char* name; //must check
 	uint tilewidth = 0;
 	uint tileheight = 0;
 	uint spaceing = 0;
@@ -19,7 +21,7 @@ struct tileset_info {
 };
 
 enum class map_orientation { ortogonal,isometric,staggered,hexagonal,error};
-enum class map_renderorder{ righ_tup, right_down, left_up, left_down, error};
+enum class map_renderorder{ right_up, right_down, left_up, left_down, error};
 
 // TODO 1: Create a struct needed to hold the information to Map node
 struct map_info {
@@ -58,17 +60,20 @@ public:
 
 private:
 	bool Load_Fill(const pugi::xml_node& map);
+	bool Load_Tileset(const pugi::xml_node& tile);
 
 public:
 
 	// TODO 1: Add your struct for map info as public for now
 	map_info map_info;
-
+	//tileset_info tileset_info;
+	std::list<tileset_info> tile_list;
 private:
 
 	pugi::xml_document	map_file;
-	pugi::xml_node        mapnode;
-	p2SString			folder;
+	pugi::xml_node        map_node;
+	pugi::xml_node        tile_node;
+	p2SString			  folder;
 	bool				map_loaded;
 };
 
