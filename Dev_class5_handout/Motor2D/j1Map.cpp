@@ -38,10 +38,17 @@ void j1Map::Draw()
 	//while (item_layer != NULL) {
 
 
-		LayerMap * l = item_layer->data;
-		
-
-		for (uint i = 0; i < l->width; i++) {//row for 
+		//LayerMap * l = item_layer->data;
+	LayerMap*layer = data.layer_map.start->data;
+	TileSet*tileset = data.tilesets.start->data;
+	for (int y=0;y<layer->height;y++){
+		for (int x = 0; x < layer->width; x++) {
+			uint id = layer->data[(layer->width*y)+x];
+			SDL_Rect rect = tileset->GetTileRect(id);
+			App->render->Blit(tileset->texture, x*tileset->tile_width, y*tileset->tile_height, &rect);
+		}
+	}
+		/*for (uint i = 0; i < l->width; i++) {//row for 
 
 			for (uint j = 0; j < l->height; j++) {//colum for
 
@@ -50,15 +57,15 @@ void j1Map::Draw()
 					iPoint mapvar = MapToWorld(i,j); //Funcion Map To World
 
 					SDL_Rect rect = item_tileset->data->GetTileRect(l->data[Get(i, j)]);
-
+					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 					App->render->Blit(item_tileset->data->texture, mapvar.x, mapvar.y, &rect);
 					
 					}
 				}
 			}	
-		//}
+		//}*/
 
-	item_layer = item_layer->next;
+	//item_layer = item_layer->next;
 	}
 		// TODO 9: Complete the draw function
 
