@@ -39,21 +39,35 @@ void j1Map::PropagateBFS()
 {
 	// TODO 1: If frontier queue contains elements
 	// pop the last one and calculate its 4 neighbors
-	p2Queue_item<iPoint>* lastfrontier = nullptr;
-	p2List_item<iPoint>* startvisited = visited.start;
+	p2Queue_item<iPoint>* lastFrontier = nullptr;
+	p2Queue<iPoint> aux_queue;
 
-	lastfrontier = frontier.GetLast();
+	lastFrontier = frontier.start;
 
-	if (lastfrontier != nullptr) {
-
-		frontier.Pop(lastfrontier->data);
-		visited.add(iPoint(lastfrontier->data.x, lastfrontier->data.y + 1));
-		visited.add(iPoint(lastfrontier->data.x, lastfrontier->data.y - 1));
-		visited.add(iPoint(lastfrontier->data.x + 1, lastfrontier->data.y));
-		visited.add(iPoint(lastfrontier->data.x - 1, lastfrontier->data.y));
-
-	 }
+	if (lastFrontier != nullptr)
+	{
+		frontier.Pop(lastFrontier->data);
+		aux_queue.Push(iPoint(lastFrontier->data.x, lastFrontier->data.y - 1));
+		aux_queue.Push(iPoint(lastFrontier->data.x + 1, lastFrontier->data.y));
+		aux_queue.Push(iPoint(lastFrontier->data.x, lastFrontier->data.y + 1));
+		aux_queue.Push(iPoint(lastFrontier->data.x - 1, lastFrontier->data.y));
 	}
+
+	p2Queue_item<iPoint>* queue_item = aux_queue.start;
+
+	while (queue_item != NULL)
+	{
+		if (visited.find(queue_item->data) == -1 && IsWalkable(queue_item->data.x,queue_item->data.y ))
+		{
+			frontier.Push(queue_item->data);
+			visited.add(queue_item->data);
+		}
+		aux_queue.Pop(queue_item->data);
+		queue_item = queue_item->next;
+	}
+
+}
+	
 
 
 
@@ -99,10 +113,37 @@ void j1Map::DrawBFS()
 
 bool j1Map::IsWalkable(int x, int y) const
 {
+	bool ret = false;
+	
+	p2List_item<MapLayer*>* item = data.layers.start;
+	
+	
 	// TODO 3: return true only if x and y are within map limits
 	// and the tile is walkable (tile id 0 in the navigation layer)
-	return true;
+	if (x >= 0 && x < data.width && y >= 0 && y < data.height)
+	{
+		 while (item != NULL)
+		{
+			if (item->data->properties.Get("Navigation") != 1)
+			{
+				item = item->next;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if (item->data->Get(x, y) != 26)
+		{
+			ret = true;
+
+		}
+	}
+	return ret;
 }
+
+
 
 void j1Map::Draw()
 {
