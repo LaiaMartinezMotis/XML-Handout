@@ -196,7 +196,34 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	// If it is already in the open list, check if it is a better path (compare G)
 	// If it is a better path, Update the parent
 	
+	for (p2List_item<PathNode>* nodepartners = partners.list.start; nodepartners; nodepartners = nodepartners->next)
+	{
+		p2List_item<PathNode>* closenode = (p2List_item<PathNode>*)close.Find(nodepartners->data.pos);
+		p2List_item<PathNode>* opennode = (p2List_item<PathNode>*)open.Find(nodepartners->data.pos);
+
+
+
+		if (closenode != NULL)
+		{
+			continue;
+		}
+		nodepartners->data.CalculateF(destination);
+		if (opennode == NULL) {
+			open.list.add(nodepartners->data);
+		}
+
+		/*else if(nodepartners->data.numSteps<opennode->data.numSteps)
+		{
+			opennode->data.parent = &current->data;
+		
+		}*/
+	}
 	
+
+
+
+
+	}
 
 	// TODO 3: Move the lowest score cell from open list to the closed list
 	
