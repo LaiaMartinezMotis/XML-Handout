@@ -181,23 +181,46 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	p2List_item<PathNode>* path_list = open.list.start;
 	while (open.list.count() != 0 && path_list != nullptr)
 	{
-		path_list = path_list->next;
-	}
-	
+		// TODO 3: Move the lowest score cell from open list to the closed list
+    p2List_item<PathNode>* lowestscore = open.GetNodeLowestScore();
+	p2List_item<PathNode>* current = close.list.add(lowestscore->data);
+	open.list.del(lowestscore);//Eliminar 
 
-	// TODO 3: Move the lowest score cell from open list to the closed list
-	
-	// TODO 4: If we just added the destination, we are done!
-	// Backtrack to create the final path
-	// Use the Pathnode::parent and Flip() the path when you are finish
 
 	// TODO 5: Fill a list of all adjancent nodes
-
+	PathList partners;
+	current->data.FindWalkableAdjacents(partners);
 	// TODO 6: Iterate adjancent nodes:
 	// ignore nodes in the closed list
 	// If it is NOT found, calculate its F and add it to the open list
 	// If it is already in the open list, check if it is a better path (compare G)
 	// If it is a better path, Update the parent
+	
+	
+
+	// TODO 3: Move the lowest score cell from open list to the closed list
+	
+
+	// TODO 4: If we just added the destination, we are done!
+	// Backtrack to create the final path
+	// Use the Pathnode::parent and Flip() the path when you are finish
+	
+	last_path.Clear();
+	const p2List_item<PathNode>* backtrack = close.list.end;
+
+	while (backtrack != NULL) 
+	{
+		last_path.PushBack(backtrack->data.pos);
+		if (backtrack->data.parent != nullptr) {
+			backtrack = close.Find(backtrack->data.parent->pos);
+		}
+		else backtrack = NULL;
+	}
+	last_path.Flip();
+
+
+
+	
 
 	return -1;
 }
