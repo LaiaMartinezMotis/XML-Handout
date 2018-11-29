@@ -3,18 +3,18 @@
 
 #include "p2Defs.h"
 #include "UI_GUI.h"
-
+#include "SDL/include/SDL.h"
 
 class UI_Sprite: public UI_GUI
 {
 public:
-	UI_Sprite();
+	UI_Sprite(SDL_Rect rect);
 	~UI_Sprite() {};
 
 	void Draw() const;
 
 private:
-	// SDL_RECT sprte_rect;
+	 SDL_Rect sprite_rect;
 	
 };
 

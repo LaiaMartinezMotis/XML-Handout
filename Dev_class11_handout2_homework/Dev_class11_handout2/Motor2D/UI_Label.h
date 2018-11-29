@@ -15,7 +15,7 @@ public:
 
 private:
 	p2SString label_text;
-	SDL_Color label_color = { 0,0,0,255 };;
+	SDL_Color label_color = { 0,0,0,255 };
 
 };
 

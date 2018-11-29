@@ -2,6 +2,7 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
+#include "SDL/include/SDL.h"
 
 #define CURSOR_WIDTH 2
 
@@ -34,8 +35,14 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
+	
+	UI_GUI* CreateLabel(int x, int y, const char* text, SDL_Color color);
+	UI_GUI* CreateSprite(int x, int y, SDL_Rect rect);
 
-	const SDL_Texture* GetAtlas() const;
+
+	SDL_Texture* GetAtlas() const;
+	
+	
 
 private:
 

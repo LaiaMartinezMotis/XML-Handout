@@ -6,6 +6,11 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
+#include "UI_GUI.h"
+#include "UI_Label.h"
+#include "UI_Sprite.h"
+
+#include "SDL/include/SDL.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -55,8 +60,31 @@ bool j1Gui::CleanUp()
 	return true;
 }
 
+
+UI_GUI * j1Gui::CreateLabel(int x, int y, const char * text, SDL_Color color)
+{
+	UI_GUI* label = nullptr;
+	label = new UI_Label(text, color);
+	label->pos_x = x;
+	label->pos_y = y;
+	label->type = LABEL;
+
+	return label;
+}
+
+UI_GUI * j1Gui::CreateSprite(int x, int y, SDL_Rect rect)
+{
+	UI_GUI* sprite = nullptr;
+	sprite = new UI_Sprite(rect);
+	sprite->pos_x = x;
+	sprite->pos_y = y;
+	sprite->type = SPRITE;
+
+	return sprite;
+}
+
 // const getter for atlas
-const SDL_Texture* j1Gui::GetAtlas() const
+ SDL_Texture* j1Gui::GetAtlas() const
 {
 	return atlas;
 }

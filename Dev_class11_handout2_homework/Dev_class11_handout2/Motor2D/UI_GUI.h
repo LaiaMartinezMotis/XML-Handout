@@ -17,14 +17,20 @@ public:
 	UI_GUI() {};
 	~UI_GUI() {};
 
-protected:
+	bool Start();
+	bool PreUpdate();
+	bool Update(float dt);
+
+
+	virtual void Draw() {};
+
+
+
+
+public: 
 	UI_Type type;
 	int     pos_x = 0;
 	int     pos_y = 0;
-
-
-
-
 
 };
 
