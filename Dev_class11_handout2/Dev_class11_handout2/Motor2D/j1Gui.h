@@ -40,14 +40,16 @@ public:
 	
 	UI_GUI* CreateLabel(int x, int y, const char* text, SDL_Color color);
 	UI_GUI* CreateSprite(int x, int y, SDL_Rect rect);
+	UI_GUI* CreateButton(int x, int y, SDL_Rect rect);
 
 	SDL_Texture* GetAtlas() const;
+	p2List<UI_GUI*> gui_list;
 
 private:
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 
-	p2List<UI_GUI*> gui_list;
+	
 };
 
 #endif // __j1GUI_H__

@@ -12,6 +12,7 @@ public:
 	~UI_Label() {};
 
 	bool PostUpdate();
+	void OnHover();
 	void Draw() const;
 
 private:

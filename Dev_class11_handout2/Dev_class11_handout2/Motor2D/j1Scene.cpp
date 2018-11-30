@@ -9,6 +9,9 @@
 #include "j1Map.h"
 #include "j1PathFinding.h"
 #include "j1Gui.h"
+#include "UI_GUI.h"
+#include "UI_Label.h"
+#include "UI_Sprite.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -32,6 +35,11 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	App->gui->gui_list.add(App->gui->CreateSprite((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 485, 829, 328, 103 })));
+	// Normal Button App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 0,113,229,69 })));
+	// Bright Button: App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 411,169,229,69 })));
+	//App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 642,169,229,69 })));
+	App->gui->gui_list.add(App->gui->CreateLabel(30, 30, "BONDIA", {0,255,0,0}));
 	if(App->map->Load("iso_walk.tmx") == true)
 	{
 		int w, h;
@@ -75,6 +83,8 @@ bool j1Scene::PreUpdate()
 			origin_selected = true;
 		}
 	}
+	App->gui->gui_list.start->data->pos_x = ((-App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2);
+	App->gui->gui_list.start->data->pos_y = (-App->render->camera.y + 50);
 
 	return true;
 }

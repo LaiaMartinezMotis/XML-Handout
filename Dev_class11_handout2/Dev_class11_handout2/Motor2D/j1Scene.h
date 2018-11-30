@@ -2,7 +2,7 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
-
+#include "p2List.h"
 struct SDL_Texture;
 class GuiImage;
 class GuiText;
@@ -35,6 +35,7 @@ public:
 	bool CleanUp();
 
 private:
+	
 	SDL_Texture* debug_tex;
 	GuiImage* banner;
 	GuiText* text;

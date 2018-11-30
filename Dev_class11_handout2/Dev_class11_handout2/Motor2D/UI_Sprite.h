@@ -11,6 +11,7 @@ public:
 	UI_Sprite(SDL_Rect rect);
 	~UI_Sprite() {};
 
+	bool PostUpdate();
 	void Draw() const;
 
 private:

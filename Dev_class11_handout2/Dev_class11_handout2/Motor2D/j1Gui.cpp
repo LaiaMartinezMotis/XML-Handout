@@ -10,8 +10,11 @@
 #include "UI_GUI.h"
 #include "UI_Label.h"
 #include "UI_Sprite.h"
+#include "UI_Button.h"
 
 #include "SDL/include/SDL.h"
+#include "SDL_ttf/include/SDL_ttf.h"
+
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -38,7 +41,7 @@ bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
-	CreateLabel(50, 50, "Hola, que tal la vida", { 150,30,90,255 });
+	//CreateLabel(50, 50, "Hola, que tal la vida", { 150,30,90,255 });
 	return true;
 }
 
@@ -83,7 +86,7 @@ UI_GUI* j1Gui::CreateLabel(int x, int y, const char * text, SDL_Color color)
 	label->pos_y = y;
 	label->type = LABEL;
 
-	gui_list.add(label);
+	/*gui_list.add(label);*/
 
 	return label;
 }
@@ -96,12 +99,20 @@ UI_GUI* j1Gui::CreateSprite(int x, int y, SDL_Rect rect)
 	sprite->pos_y = y;
 	sprite->type = SPRITE;
 
-	gui_list.add(sprite);
-
+	/*gui_list.add(sprite);*/
 
 	return sprite;
 }
+UI_GUI*j1Gui::CreateButton(int x, int y, SDL_Rect rect)
+{
+	UI_GUI* button = nullptr;
+	button = new UI_Button(rect);
+	button->pos_x = x;
+	button->pos_y = y;
+	button->type = BUTTON;
 
+	return button;
+};
 // const getter for atlas
  SDL_Texture* j1Gui::GetAtlas() const
 {

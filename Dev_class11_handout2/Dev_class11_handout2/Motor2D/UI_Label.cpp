@@ -19,6 +19,10 @@ bool UI_Label::PostUpdate()
 	return true;
 }
 
+void UI_Label::OnHover()
+{
+}
+
 void UI_Label::Draw()const
 {
 	App->font->Print(label_text.GetString(), label_color, App->font->default);

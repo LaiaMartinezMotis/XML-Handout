@@ -21,7 +21,8 @@ public:
 	bool PreUpdate();
 	virtual bool PostUpdate() { return true; };
 
-
+	virtual void OnClick() {};
+	virtual void OnHover() {};
 	virtual void Draw() {};
 
 
